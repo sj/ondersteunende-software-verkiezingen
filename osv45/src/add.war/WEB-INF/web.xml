@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+ <description>Ondersteunende Software Verkiezingen (Produktion web.xml)</description>
+ <display-name>OSV / Prod</display-name>
+ <!-- Servlets 
+ WahlSystem -->
+ <servlet>
+  <servlet-name>osv</servlet-name>
+  <servlet-class>de.ivu.wahl.client.servlet.WahlServlet</servlet-class>
+  <init-param>
+   <param-name>uriBase</param-name>
+   <param-value>/</param-value>
+  </init-param>
+  <init-param>
+   <param-name>secure</param-name>
+   <param-value>true</param-value>
+  </init-param>
+ </servlet>
+ <!-- END Replication 
+ URL mappings 
+ WahlSystem -->
+ <servlet-mapping>
+  <servlet-name>osv</servlet-name>
+  <url-pattern>/osv/*</url-pattern>
+ </servlet-mapping>
+ <!-- END Replication 
+ Allgemein -->
+ <session-config>
+  <session-timeout>2</session-timeout>
+ </session-config>
+ <mime-mapping>
+  <extension>ico</extension>
+  <mime-type>image/x-icon</mime-type>
+ </mime-mapping>
+ <jsp-config>
+  <taglib>
+   <taglib-uri>http://www.ivu.de/taglibs/ivu-wahl-1.0</taglib-uri>
+   <taglib-location>/WEB-INF/taglib/wahlTagLib.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/tags/jstl-c</taglib-uri>
+   <taglib-location>/WEB-INF/taglib/c.tld</taglib-location>
+  </taglib>
+  <taglib>
+   <taglib-uri>/tags/jstl-x</taglib-uri>
+   <taglib-location>/WEB-INF/taglib/x.tld</taglib-location>
+  </taglib>
+ </jsp-config>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>

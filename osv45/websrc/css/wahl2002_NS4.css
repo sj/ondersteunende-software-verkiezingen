@@ -1,0 +1,750 @@
+.status{
+	height:150px;
+	left:200px;
+	position:fixed;
+	top:80px;
+	width:400px;
+}
+* html .status {
+	position: absolute;
+	top:170px; 
+	left:130px; 
+	width:400px; 
+	height:150px;
+}
+.trans {
+  -moz-opacity:0.5;
+}
+
+body {  font-family: Verdana, Arial, Helvetica;
+        font-size: 11px
+}
+
+#erg td {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: #093C69;
+	padding-top: 0px; 
+	padding-bottom: 0px;
+}
+input.erg {
+	padding-top: 0px; 
+	padding-bottom: 0px;
+	font-size:10px;
+}
+
+td {    font-family: Verdana, Arial, Helvetica;
+        font-size: 11px
+}
+
+p {	font-family: Verdana, Arial, Helvetica;
+       font-size: 11px
+}
+
+h3 {  font-size: 13px;
+      line-height: 14px
+}
+
+h2 {  font-size: 15px
+}
+
+
+.rot {  font-size:1.1em; 
+		font-weight:bold;
+		color:red
+}
+
+/* Konfigurationsstring */
+.klein { font-size: 11px;
+         font-family: Arial, Verdana, Helvetica;
+         padding-left: 4px;
+         color: #330000
+}
+
+.hgweiss { background-color: #FFFFFF
+}
+.hgweisshervorg { 
+	background-color: #FFFFFF;
+	font-weight:bold;
+	color:red
+}
+
+
+/* Linien in befehl.jsp */
+.hggrau { background-color: #CCCCCC
+          font-family: Verdana, Arial, Helvetica;
+          font-size: 11px;
+          color: #000000;
+          font-weight:bold
+}
+
+.hggrau2 { background-color: #999999
+}
+
+/* Linie in navigation.jsp */
+.hgdklgrau { background-color: #525151
+}
+
+.hgeeeeee { background-color: #EEEEEE
+}
+.hgeeeeeehervorg { 
+	background-color: #EEEEEE;
+	font-weight:bold;
+	color:red
+}
+.hgschwarz {  background-color: #333333;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px
+}
+
+.hgdunkel { background-color: #666666;
+	    font-family: Arial, Verdana, Helvetica;
+	    font-size: 11px;
+       color: #FFFFFF
+}
+
+.hgrot {  background-color: #660000;
+	  font-family: Arial, Verdana, Helvetica;
+	  font-size: 11px;
+     color: #FFFFFF
+}
+
+.hghell { background-color: #CCCCCC;
+	  font-family: Arial, Verdana, Helvetica;
+	  font-size: 11px;
+     color: #000000
+}
+
+.hgheller {
+	background-color: #F2F2F2;
+}
+
+.hgformular { background-color: #EBEBEB;
+	  font-family: Arial, Verdana, Helvetica;
+	  font-size: 11px;
+     font-weight: bold;
+     color: #000000
+}
+
+
+/* 3. Ebene der Navigation: Hintergundfarbe */
+.hgnavi { background-color: #BBBBBA;
+	  font-family: Arial, Verdana, Helvetica;
+	  font-size: 11px;
+     color: #000000
+}
+
+/* Hintergrund oben in befehl.jsp */
+.hgoben { background-color: #9F8F8F;
+	  font-family: Arial, Verdana, Helvetica;
+     color: white;
+     font-variant: small-caps;
+     font-size: 10px
+}
+
+
+a:link, a:active, a:visited { font-family: Arial, Verdana, Helvetica;
+               font-size: 11px;
+               color: #333333;
+               text-decoration: none
+      }
+
+ /* Link 'Nachrichten', 'Administration' in navigation.jsp */
+.linkhell { font-family: Arial, Verdana, Helvetica;
+	         font-size: 11px;
+	         color: #FFFFFF;
+            text-decoration: none
+}
+
+.linkdunkel { color: #333333;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+              text-decoration: none
+}
+
+.linkrot { font-family: Arial, Verdana, Helvetica;
+           font-size: 11px;
+	        color: #660000;
+           text-decoration: none
+}
+
+/* Link zum Drucken der Seite */
+.linkdklrot { font-family: Arial, Verdana, Helvetica;
+           font-size: 10px;
+	        color: #330000;
+           text-decoration: none
+}
+
+.schriftrot { font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+              color: #660000
+}
+.schriftweiss { font-family: Verdana, Helvetica;
+              font-size: 11px;
+              color: #FFFFFF
+}
+
+
+/* in navigation.jsp vor den Eintr�gen */
+.abstand1 { padding-left: 1px
+}
+
+/* in navigation.jsp vor den Eintr�gen */
+.abstand4 { padding-left: 4px
+}
+
+/* in befehl.jsp Men�-Leiste oben */
+.abstand15 { padding-left: 15px
+}
+
+/* in navigation.jsp vor den Eintr�gen */
+.abstand18 { padding-left: 18px
+}
+
+/* eingeg./ausstehend Wahlkreise, Mehrheitswechsel */
+#box {
+  background: #FFFFFF;
+  margin-top:1px
+}
+
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_1 {
+  color: #FFFFFF;
+  background: #660000
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_2 {
+  color: #FFFFFF;
+  background: #990000
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_3 {
+  color: #FFFFFF;
+  background: #996666
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_4 {
+  color: #FFFFFF;
+  background: #CC0000
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_5 {
+  color: #000000;
+  background: #D08989
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_6 {
+  color: #FFFFFF;
+  background: #B48080
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_selected {
+  color: #000000;
+  background: #FFFFFF;
+  font-weight: bold;
+}
+
+
+/* Absende-Knopf: gebietEingang.jsp */
+#box2 {
+  color: #FFFFFF;
+  background: #666666;
+  border-left : 1px solid #CCCCCC;
+  border-bottom : 1px solid #333333;
+  border-right : 1px solid #333333;
+  border-top : 1px solid #CCCCCC;
+  text-align: center;
+  font-family: Arial, Verdana, Helvetica;
+  font-size: 11px
+
+}
+
+
+/* Warnfenster: gebietEingang.jsp -> Muss-Fehler */
+#layer1 {
+  position:absolute;
+  width:240px;
+  height: 140px;
+  padding-left: 6px;
+  padding-right: 3px;
+  align:right;
+  background-color: #FFFFFF;
+  border: 3px solid #FF0000;
+  right: 40px;
+  top: 70px;
+  font-family: Arial, Verdana, Helvetica;
+  font-size:12px
+}
+
+/* Warnfenster: gebietEingang.jsp -> Kann-Fehler */
+#layer1b {
+  position:absolute;
+  width:240px;
+  padding-left: 6px;
+  padding-right: 3px;
+  align:right;
+  background-color: #FFCC66;
+  border: 1px solid #000000;
+  right: 40px;
+  top: 70px;
+  font-family: Arial, Verdana, Helvetica;
+  font-size: 12px
+}
+
+/* Warnfenster: gebietEingang.jsp -> Muss-Fehler */
+#layer1c {
+  position:absolute;
+  width:410px;
+  height: 120px;
+  padding-left: 6px;
+  padding-right: 3px;
+  align:right;
+  background-color: #FF0000;
+  border: 1px solid #000000;
+  right: 20px;
+  top: 20px;
+  font-family: Arial, Verdana, Helvetica;
+  font-size: 12px
+}
+
+/* Zeit u. Anzahl der eingegangenenen Wahlkreise */
+.layer3 {
+  color: #330000;
+  font-family: Arial;
+  padding-top: 0px;
+  padding-left: 4px;
+  padding-right: 5px;
+  margin-right: 1px;
+  font-size: 10px
+}
+/*style f�r level Wahl*/
+a.level1:link, a.level1:visited{
+	background-color: #660000;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level1:hover, a.level1:active {
+	background-color: #996666;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #000000;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+a.level2:link, a.level2:visited{
+	background-color: #333333;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 3px;
+}
+
+
+a.level2:hover, a.level2:active {
+	background-color: #999999;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 3px;	
+}
+
+a.level3:link, a.level3:visited{
+	background-color: #663333;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 6px;
+}
+
+
+a.level3:hover, a.level3:active {
+	background-color: #cc9999;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 6px;	
+}
+
+a.level4:link, a.level4:visited{
+	background-color: #666666;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 9px;
+}
+
+
+a.level4:hover, a.level4:active {
+	background-color: #cccccc;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 9px;	
+}
+
+a.level5:link, a.level5:visited{
+	background-color: #996666;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+	text-indent: 12px;
+}
+
+
+a.level5:hover, a.level5:active {
+	background-color: #E2C6C6;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 12px;	
+}
+
+a.level6:link, a.level6:visited{
+	background-color: #999999;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 15px;
+}
+
+
+a.level6:hover, a.level6:active {
+	background-color: #C6BDBD;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 15px;	
+}
+
+a.level7:link, a.level7:visited{
+	background-color: #cc9999;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 19px;
+}
+
+
+a.level7:hover, a.level7:active {
+	background-color: #EFD7D7;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #333333;
+	text-indent: 19px;	
+}
+
+a.level8:link, a.level8:visited{
+	background-color: #cccccc;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #666666;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 21px;
+}
+
+
+a.level8:hover, a.level8:active {
+	background-color: #EAE9E9;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+	text-indent: 21px;	
+}
+
+/*style f�r zweiten Link in der Navigation*/
+a.level11:link, a.level11:visited{
+	background-color: #660000;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level11:hover, a.level11:active {
+	background-color: #996666;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #000000;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+a.level21:link, a.level21:visited{
+	background-color: #333333;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level21:hover, a.level21:active {
+	background-color: #999999;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+a.level31:link, a.level31:visited{
+	background-color: #663333;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level31:hover, a.level31:active {
+	background-color: #cc9999;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+a.level41:link, a.level41:visited{
+	background-color: #666666;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level41:hover, a.level41:active {
+	background-color: #cccccc;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+a.level51:link, a.level51:visited{
+	background-color: #996666;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #CCCCCC;
+}
+
+
+a.level51:hover, a.level51:active {
+	background-color: #E2C6C6;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+a.level61:link, a.level61:visited{
+	background-color: #999999;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+
+a.level61:hover, a.level61:active {
+	background-color: #C6BDBD;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+a.level71:link, a.level71:visited{
+	background-color: #cc9999;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #FFFFFF;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+
+a.level71:hover, a.level71:active {
+	background-color: #EFD7D7;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #333333;
+}
+
+a.level81:link, a.level81:visited{
+	background-color: #cccccc;
+	font-family: Arial, Verdana, Helvetica;
+	font-size: 11px;
+	color: #666666;
+	display:block;
+	width: 100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+
+a.level81:hover, a.level81:active {
+	background-color: #EAE9E9;
+    font-family: Arial, Verdana, Helvetica;
+    font-size: 11px;
+	color: #333333;
+	display:block;
+	width:100%;
+	padding:1px;
+	border-bottom:1px solid #666666;
+}
+
+
+
+
+.level1 {  background-color: #660000;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+			  color: #CCCCCC;
+}
+.level2 {  background-color: #333333;
+              font-family: Arial, Verdana, Helvetica;
+			  color: #CCCCCC;
+              font-size: 11px;
+			  text-indent: 3px}
+.level3 {  background-color: #663333;
+              font-family: Arial, Verdana, Helvetica;
+			  color: #CCCCCC;
+              font-size: 11px;
+			  text-indent: 6px}
+.level4 {  background-color: #666666;
+              font-family: Arial, Verdana, Helvetica;
+			  color: #CCCCCC;
+              font-size: 11px;
+			  text-indent: 9px}
+.level5 {  background-color: #996666;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+			  text-indent: 12px}
+.level6 {  background-color: #999999;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+			  text-indent: 15px}
+.level7 {  background-color: #cc9999;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+			  text-indent: 18px}
+.level8 {  background-color: #cccccc;
+              font-family: Arial, Verdana, Helvetica;
+              font-size: 11px;
+			  text-indent: 21px}
+

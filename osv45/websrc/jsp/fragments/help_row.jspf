@@ -1,0 +1,9 @@
+<%-- This fragment contains a table row with help function
+     It is required to define the variables backgroundColor and helpKey --%>
+
+<tr class="hgeeeeee" align="right" style="background-color: <%=backgroundColor%>;">
+	<td><ivu:help key="<%=helpKey%>"/></td>
+</tr>
+<tr class="hgeeeeee">
+	<td class="hgschwarz"><img src="<%= request.getContextPath() %>/img/icon/blind.gif" width="1" height="1"></td>
+</tr>

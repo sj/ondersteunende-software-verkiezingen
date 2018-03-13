@@ -1,0 +1,25 @@
+<%-- 
+	This fragment contains a table row with print and help function
+	It is required to define the variables
+	- backgroundColor
+	- helpKey 
+	- breite
+	- ClientHelper must be imported
+--%>
+
+<table width="<%= breite %>" border="0" cellspacing="0" cellpadding="0" class="hgeeeeee" style="background-color: <%=backgroundColor%>;">
+	<tr class="print-hidden">
+		<td class="klein"><%= ClientHelper.getKonfigurationsString(request)%></td>
+		<td align="right"><%-- Zum Drucken des aktuellen Frames --%>
+			<a name="oben" href="javascript:window.print()" style="text-decoration:none" id="oben">
+				<span class="linkdklrot">
+					<img src="<%= request.getContextPath() %>/img/icon/drucken.gif" width="24" height="9" alt="" border="0" />
+					<ivu:int key="SeiteDrucken"/>
+				</span>
+			</a>
+			<ivu:help key="<%=helpKey%>"/>
+		</td>
+	</tr>
+</table>
+
+

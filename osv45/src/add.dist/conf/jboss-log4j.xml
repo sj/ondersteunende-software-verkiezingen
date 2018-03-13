@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: jboss-log4j.xml,v 1.6 2009/12/18 12:44:28 tdu Exp $ -->
+
+<!--
+   | For more configuration infromation and examples see the Jakarta Log4j
+   | owebsite: http://jakarta.apache.org/log4j
+ -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- Wahlapplikation Logger (fachlich) Appender -->
+   <appender name="APPLOG" class="org.jboss.logging.appender.DailyRollingFileAppender">
+      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+      <param name="File" value="${jboss.server.log.dir}/UserAction.log"/>
+      <param name="Append" value="true"/>
+      <!-- Rollover at midnight each day -->
+      <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] (%x) %m%n"/>
+      </layout>
+   </appender>
+
+   <!-- ================================= -->
+   <!-- Preserve messages in a local file -->
+   <!-- ================================= -->
+   <!-- A time/date based rolling appender -->
+   <appender name="FILE" class="org.jboss.logging.appender.DailyRollingFileAppender">
+      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+      <param name="File" value="${jboss.server.log.dir}/server.log"/>
+      <param name="Append" value="true"/>
+      <param name="Threshold" value="INFO"/>
+      <!-- Rollover at midnight each day -->
+      <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+
+      <!-- Rollover at the top of each hour
+      <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+      -->
+
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] (%x) %m%n"/>
+
+         <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+         <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+          -->
+      </layout>
+   </appender>
+
+   <!-- A size based file rolling appender
+   <appender name="FILE" class="org.jboss.logging.appender.RollingFileAppender">
+     <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+     <param name="File" value="${jboss.server.log.dir}/server.log"/>
+     <param name="Append" value="false"/>
+     <param name="MaxFileSize" value="500KB"/>
+     <param name="MaxBackupIndex" value="1"/>
+
+     <layout class="org.apache.log4j.PatternLayout">
+       <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+     </layout>	    
+   </appender>
+   -->
+
+   <appender name="TRANSACTION" class="org.jboss.logging.appender.RollingFileAppender">
+      <param name="File" value="${jboss.server.log.dir}/transaction.log"/>
+      <param name="Append" value="true"/>
+      <param name="Threshold" value="DEBUG"/>
+      <param name="MaxFileSize" value="5MB"/>
+      <param name="MaxBackupIndex" value="10"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-1.1p (%t:%x) %m%n"/>
+      </layout>
+   </appender>
+   <appender name="IVU_ASYNC" class="org.apache.log4j.AsyncAppender">
+      <appender-ref ref="IVU"/>
+   </appender>
+   <appender name="IVU" class="org.jboss.logging.appender.RollingFileAppender">
+      <param name="File" value="${jboss.server.log.dir}/ivu.log"/>
+      <param name="Append" value="true"/>
+      <param name="Threshold" value="DEBUG"/>
+      <param name="MaxFileSize" value="50MB"/>
+      <param name="MaxBackupIndex" value="20"/>
+      <!-- Rollover at midnight each day
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+     -->
+      <!-- Rollover at the top of each hour
+    <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+    -->
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] (%t:%x) %m%n"/>
+         <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+      <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+       -->
+      </layout>
+   </appender>
+   <appender name="JSP" class="org.jboss.logging.appender.RollingFileAppender">
+      <param name="File" value="${jboss.server.log.dir}/jsp.log"/>
+      <param name="Append" value="true"/>
+      <param name="Threshold" value="DEBUG"/>
+      <param name="MaxFileSize" value="500KB"/>
+      <param name="MaxBackupIndex" value="50"/>
+      <!-- Rollover at midnight each day
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+     -->
+      <!-- Rollover at the top of each hour
+    <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+    -->
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] (%x) %m%n"/>
+         <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+      <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+       -->
+      </layout>
+   </appender>
+   <appender name="SYSTEM" class="org.jboss.logging.appender.RollingFileAppender">
+      <param name="File" value="${jboss.server.log.dir}/system.log"/>
+      <param name="Append" value="true"/>
+      <param name="Threshold" value="INFO"/>
+      <param name="MaxFileSize" value="500KB"/>
+      <param name="MaxBackupIndex" value="50"/>
+      <!-- Rollover at midnight each day
+    <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+     -->
+      <!-- Rollover at the top of each hour
+    <param name="DatePattern" value="'.'yyyy-MM-dd-HH"/>
+    -->
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+         <!-- The full pattern: Date MS Priority [Category] (Thread:NDC) Message\n
+      <param name="ConversionPattern" value="%d %-5r %-5p [%c] (%t:%x) %m%n"/>
+       -->
+      </layout>
+   </appender>
+
+   <!-- ============================== -->
+   <!-- Append messages to the console -->
+   <!-- ============================== -->
+
+   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+      <errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>
+      <param name="Target" value="System.out"/>
+      <param name="Threshold" value="INFO"/>
+
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] (%x) %m%n"/>
+      </layout>
+   </appender>
+     
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+   <!-- OSV Logger  -->
+   <category name="applog" additivity="false">
+      <priority value="INFO"/>
+      <appender-ref ref="APPLOG"/>
+   </category>
+   
+   <!-- OSV Result Determination Logger -->
+   <category name="de.ivu.wahl.result.determination" additivity="false">
+      <priority value="INFO"/>
+      <appender-ref ref="APPLOG"/>
+   </category>
+   
+   <category name="org.jboss.ejb.BeanLock">
+      <priority value="TRACE#org.jboss.logging.XLevel"/>
+      <appender-ref ref="TRANSACTION"/>
+   </category>
+   <category name="org.jboss.ejb.plugins.EntityLockInterceptor">
+      <priority value="TRACE#org.jboss.logging.XLevel"/>
+      <appender-ref ref="TRANSACTION"/>
+   </category>
+   
+   <category name="de.ivu">
+      <appender-ref ref="IVU_ASYNC"/>
+   </category>
+   <category name="de.ivu.ejb.bmp.BMPBeanBase">
+      <priority value="INFO"/>
+      <appender-ref ref="IVU_ASYNC"/>
+   </category>
+   <category name="jsp">
+      <appender-ref ref="JSP"/>
+   </category>
+
+   <!-- Limit the org.apache category to INFO as its DEBUG is verbose -->
+   <category name="org.apache">
+      <priority value="INFO"/>
+   </category>
+
+   <!-- Limit the jacorb category to WARN as its INFO is verbose -->
+   <category name="jacorb">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Limit the org.jgroups category to WARN as its INFO is verbose -->
+   <category name="org.jgroups">
+      <priority value="WARN"/>
+   </category>
+   
+   <!-- Limit the org.quartz category to INFO as its DEBUG is verbose -->
+   <category name="org.quartz">
+      <priority value="INFO"/>
+   </category>
+
+   <!-- Limit JBoss categories
+   <category name="org.jboss">
+      <priority value="INFO"/>
+   </category>
+   -->
+
+   <!-- Limit the JSR77 categories -->
+   <category name="org.jboss.management">
+      <priority value="INFO"/>
+   </category>
+
+   <!-- Show the evolution of the DataSource pool in the logs [inUse/Available/Max]
+   <category name="org.jboss.resource.connectionmanager.JBossManagedConnectionPool">
+     <priority value="TRACE"/>
+   </category>
+   -->
+   
+   <!-- Limit the org.jboss.serial (jboss-serialization) to INFO as its DEBUG is verbose -->
+   <category name="org.jboss.serial">
+      <priority value="INFO"/>
+   </category>
+   
+   <!-- Decrease the priority threshold for the org.jboss.varia category
+   <category name="org.jboss.varia">
+     <priority value="DEBUG"/>
+   </category>
+   -->
+
+   <!-- Enable JBossWS message tracing
+   <category name="org.jboss.ws.core.MessageTrace">
+    <priority value="TRACE"/>
+   </category>
+   -->
+   
+   <!-- Limit Arjuna JTA/JTS until the bug in 
+   com.arjuna.ats.internal.jta.resources.arjunacore.SynchronisationImple, Line 146 
+   is fixed (should read "return true;") -->
+   <category name="com.arjuna.ats.arjuna.logging.arjLoggerI18N">
+      <priority value="ERROR"/>
+   </category>
+
+   <!-- Limit BeanShell to WARN -->
+   <category name="org.jboss.varia.deployment.BeanShellSubDeployer">
+   	<priority value="WARN"/>
+   </category>
+
+   <!-- ======================= -->
+   <!-- Setup the Root category -->
+   <!-- ======================= -->
+
+   <root>
+      <appender-ref ref="CONSOLE"/>
+      <appender-ref ref="FILE"/>
+   </root>
+
+</log4j:configuration>

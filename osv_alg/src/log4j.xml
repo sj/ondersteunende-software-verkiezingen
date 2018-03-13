@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender class="org.apache.log4j.DailyRollingFileAppender" name="file">
+    <param name="File" value="osv_alg.log" />
+    <param name="DatePattern" value="yyyyMMdd-HH&apos;.log4j&apos;" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %d - [%t] %c{1}:%L - %m%n" />  
+    </layout>
+  </appender>
+  <appender class="org.apache.log4j.ConsoleAppender" name="ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %d - [%t] %c{1}:%L - %m%n" />  
+    </layout>
+  </appender>
+  <category name="de.ivu.wahl.dataimport" additivity="false">
+    <priority value="INFO"/>
+    <appender-ref ref="file"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </category>
+  <category name="de.ivu.wahl.result" additivity="false">
+    <priority value="TRACE"/>
+    <appender-ref ref="file"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </category>
+  <root>
+    <priority value="debug" />
+    <appender-ref ref="file" />
+    <appender-ref ref="ConsoleAppender" />
+  </root>
+</log4j:configuration>
+

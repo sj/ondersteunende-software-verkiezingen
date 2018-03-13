@@ -1,0 +1,9 @@
+try {
+  // close eventual SplashScreen
+  final SplashScreen splashScreen = SplashScreen.getSplashScreen();
+  if (splashScreen != null) {
+    splashScreen.close();
+  }
+} catch (Exception e) {
+  System.out.println("Splash Screen not present: " + e);
+}

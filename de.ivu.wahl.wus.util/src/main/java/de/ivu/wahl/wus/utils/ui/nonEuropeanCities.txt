@@ -1,0 +1,6 @@
+Bonaire=1
+Kralendijk=1
+Rincon=1
+Saba=2
+Sint Eustatius=3
+St. Eustatius=3

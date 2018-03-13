@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xmlsecurity Plug-in
+Bundle-SymbolicName: de.ivu.wahl.wus.xmlsecurity
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: external-libs/xom-1.2.10.jar,
+ .
+Export-Package: de.ivu.wahl.wus.xmlsecurity
+Bundle-Vendor: IVU Traffic Technologies AG

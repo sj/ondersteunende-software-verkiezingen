@@ -1,0 +1,6 @@
+<%-- This fragment contains a div element help function
+     It is required to define the variables backgroundColor and helpKey --%>
+
+<div class="hgeeeeee" style="height: 14px; width: 100%; background-color: <%=backgroundColor%>;" align="right">
+    <ivu:help key="<%=helpKey%>"/>
+</div>

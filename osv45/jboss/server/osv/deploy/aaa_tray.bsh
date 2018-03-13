@@ -1,0 +1,65 @@
+try {
+	if (SystemTray.isSupported()) {
+    ByteArrayInputStream white = new ByteArrayInputStream(org.jboss.util.Base64.decode("R0lGODlhEAAQAMIDAABIlCFMoVSV1v///////////////////yH5BAEKAAQALAAAAAAQABAAAAMrOLrc7uG9KBsNtDKsL5ff9wAcJlqmCQ7pCblCHA8CXStyrsv27te/oNCXAAA7"));
+    java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(white);
+    TrayIcon trayIcon = new TrayIcon(image, "OSV Server");
+    trayIcon.setImageAutoSize(true);
+		
+    ActionListener listener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	if (!(e.getSource() instanceof MenuItem)) {
+        		return;
+        	}
+          try {
+            ByteArrayInputStream yellow = new ByteArrayInputStream(org.jboss.util.Base64.decode("R0lGODlhEAAQAMIFAP8AAABIlCFMocOYAP///wAAAAAAAAAAACH5BAEKAAcALAAAAAAQABAAAAM2SLrcChA20aJctFqsRCYW4BDes3VdOZKZOgal506yvFL17NjM4PuEQVCo+BmPvyFyKWQ6n8sEADs="));
+            java.awt.image.BufferedImage stopImage = javax.imageio.ImageIO.read(yellow);
+            String stoppt = "OSV Server stopt";
+            TrayIcon cti = SystemTray.getSystemTray().getTrayIcons()[0];
+            cti.setImage(stopImage);
+            cti.setToolTip(stoppt);
+
+            Frame f = new Frame();
+            f.setUndecorated(true);
+            f.add(new Label(stoppt, Label.CENTER));
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = toolkit.getScreenSize();
+            int w = 150;
+            int h = 50;
+            int x = (int)(screenSize.getWidth() - w) / 2;
+            int y = (int)(screenSize.getHeight() - h) / 2;
+            f.setBounds(x, y, w, h);
+            f.setAlwaysOnTop(true);
+            f.setVisible(true);
+
+            javax.naming.InitialContext ctx = new javax.naming.InitialContext();
+            String adaptorName = "jmx/invoker/RMIAdaptor";
+            javax.management.MBeanServerConnection adaptor = (javax.management.MBeanServerConnection)ctx.lookup(adaptorName);
+            
+            // Shutdown stops AWT immediately, so stop the applications first
+            
+            javax.management.ObjectName deployerJMXName = new javax.management.ObjectName("jboss.j2ee:service=EARDeployer");
+            adaptor.invoke(deployerJMXName, "stop", new Object[]{}, new String[]{});
+            
+            javax.management.ObjectName serverJMXName = new javax.management.ObjectName("jboss.system:type=Server");
+            adaptor.invoke(serverJMXName, "shutdown", new Object[]{}, new String[]{});
+          } catch (Exception e) {
+            System.err.println(e);
+          }
+        }
+    };
+
+    PopupMenu popup = new PopupMenu();
+    MenuItem defaultItem = new MenuItem("Stoppen OSV Server");
+    defaultItem.addActionListener(listener);
+    popup.add(defaultItem);
+    trayIcon.setPopupMenu(popup);
+    trayIcon.addActionListener(listener);
+    try {
+      SystemTray.getSystemTray().add(trayIcon);
+    } catch (AWTException e) {
+        System.err.println(e);
+    }
+	}
+} catch (Exception e) {
+	System.out.println("Could not establish Tray Icon");
+}

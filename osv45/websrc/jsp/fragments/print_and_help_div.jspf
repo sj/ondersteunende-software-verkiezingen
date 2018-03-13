@@ -1,0 +1,12 @@
+<%-- This fragment contains a div element with print and help function and id = "oben" 
+     It is required to define the variables backgroundColor and helpKey --%>
+
+<div class="hgeeeeee" style="height: 14px; width: 100%;" align="right"style="background-color: <%=backgroundColor%>;">
+	<a name="oben" href="javascript:window.print()" style="text-decoration: none;" id= "oben">
+		<span class="linkdklrot">
+			<img src="<%= request.getContextPath() %>/img/icon/drucken.gif" alt="" border="0" height="9" width="24">
+		<ivu:int key="SeiteDrucken"/>
+		</span>
+	</a>
+	<ivu:help key="<%=helpKey%>"/>
+</div>

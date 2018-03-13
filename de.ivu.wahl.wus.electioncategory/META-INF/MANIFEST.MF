@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Reportgenerator Plug-in
+Bundle-SymbolicName: de.ivu.wahl.wus.electioncategory;singleton:=true
+Bundle-Version: 1.0.0
+Export-Package: de.ivu.wahl.wus.electioncategory
+Require-Bundle: org.eclipse.core.runtime,
+ com.springsource.org.apache.log4j,
+ com.ibm.icu;bundle-version="3.8.1"
+Bundle-ClassPath: .
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: IVU Traffic Technologies AG

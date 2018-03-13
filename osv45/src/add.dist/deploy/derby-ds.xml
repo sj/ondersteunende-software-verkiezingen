@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The Derby embedded database JCA connection factory config $Id: derby-ds.xml,v 1.1 2009/04/05 15:25:12 cos Exp $ -->
+
+
+<datasources>
+   <local-tx-datasource>
+
+      <!-- The jndi name of the DataSource, it is prefixed with java:/ -->
+      <!-- Datasources are not available outside the virtual machine -->
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_CSB</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_CSB/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_HSB</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_HSB/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_PSB</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_PSB/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_PSB_2</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_PSB_2/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_PSB_3</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_PSB_3/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_PSB_4</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_PSB_4/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P4_PSB_5</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program4_PSB_5/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <local-tx-datasource>
+
+      <!-- JON 23-03-2009: The JNDI name of the derby database differs for each program instance (P4_HSB, P5 etc.) -->  
+      <jndi-name>jdbc/wahlDB-P5</jndi-name>
+
+      <!-- for in-process persistent db, saved when jboss stops. The
+      org.jboss.jdbc.DerbyDatabase mbean is necessary for properly db shutdown -->
+      <!-- JON 23-03-2009: This differs for each program instance (P4_HSB, P5 etc.) -->  
+      <connection-url>jdbc:derby:$INSTALL_PATH/Program5/db/osv;create=true</connection-url>
+
+      <!-- The driver class -->
+      <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+
+      <!-- The login and password -->
+      <user-name>APP</user-name>
+      <password></password>
+
+      <!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+      <min-pool-size>5</min-pool-size>
+
+      <!-- The maximum connections in a pool/sub-pool -->
+      <max-pool-size>20</max-pool-size>
+
+      <!-- The time before an unused connection is destroyed -->
+      <idle-timeout-minutes>5</idle-timeout-minutes>
+
+      <!-- Whether to check all statements are closed when the connection is returned to the pool,
+           this is a debugging feature that should be turned off in production -->
+      <track-statements/>
+
+      <!-- This mbean can be used when using in process persistent derby -->
+      <depends>jboss:service=Derby</depends>
+   </local-tx-datasource>
+
+   <mbean code="org.jboss.jdbc.DerbyDatabase" name="jboss:service=Derby"/>
+</datasources>

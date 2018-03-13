@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="OSV" basedir=".">
+
+	<target name="echoproperties">
+		<echoproperties />
+	</target>
+
+	<property name="reportgenbasedir" value="../de.ivu.wahl.wus.reportgenerator" />
+	<property name="electioncategorybasedir" value="../de.ivu.wahl.wus.electioncategory" />
+	<property name="loggerinterfacebasedir" value="../de.ivu.wahl.wus.loggerinterface" />
+	<property name="xmlsecuritybasedir" value="../de.ivu.wahl.wus.xmlsecurity" />
+	<property name="osv_algdir" value="../osv_alg" />
+	<property name="xmlbinddir" value="../de.ivu.wahl.wus.javax.xml.bind" />
+
+	<property name="db.dir" value="${basedir}/db" />
+	<property name="db.create" value="${basedir}/docs/db/create_db_derby.sql" />
+
+	<property name="properties.dir" value="${basedir}/properties" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="websrc.dir" value="${basedir}/websrc" />
+	<property name="web.lib.dir" value="${websrc.dir}/WEB-INF/lib" />
+	<property name="toolssrc.dir" value="${basedir}/toolssrc" />
+	<property name="gensrc.dir" value="${basedir}/gensrc" />
+	<property name="reportgensrc.dir" value="${reportgenbasedir}/src/main/java" />
+	<property name="electioncategorysrc.dir" value="${electioncategorybasedir}/src/main/java" />
+	<property name="loggerinterfacesrc.dir" value="${loggerinterfacebasedir}/src/main/java" />
+	<property name="xmlsecuritysrc.dir" value="${xmlsecuritybasedir}/src/main/java" />
+	<property name="reportgenresources.dir" value="${reportgenbasedir}/src/main/resources" />
+	<property name="osv_alg.dir" value="${osv_algdir}/src" />
+	<property name="osv45_test.dir" value="${basedir}/../osv45_test/src/main/java" />
+	<property name="xmlbind.dir" value="${xmlbinddir}/src/main/java" />
+	<property name="jsp.dir" value="${websrc.dir}/jsp" />
+	<property name="class.dir" value="${basedir}/websrc/WEB-INF/classes" />
+	<property name="toolsclass.dir" value="${basedir}/toolsclasses" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="work.dir" value="${basedir}/temp" />
+	<property name="dist.dir" value="${basedir}/dist" />
+	<property name="doc.api.dir" value="${basedir}/doc/api" />
+	<property name="tomcat.work.dir" value="${basedir}/work" />
+	<property name="distfile" value="${dist.dir}/osvJBossCtx.zip" />
+
+
+	<property name="gba_src" value="${basedir}/../de.ivu.wahl.wus.util/src/main/java/de/ivu/wahl/wus/utils/ui/gba_classes.txt" />
+	<property name="gba_dest" value="${basedir}/websrc/js/gbadata.js" />
+
+	<!-- use tablegen.properties for initializing mysql db -->
+	<property file="${src.dir}/de/ivu/wahl/tablegen.properties" />
+	<property name="db.create.mysql" value="${basedir}/docs/db/create_db_mysql.sql" />
+	<condition property="jboss.dir" value="${basedir}">
+		<isset property="jenkins.build" />
+	</condition>
+	<condition property="jboss.dir" value="D:/develop/jboss-4.2.3.GA">
+		<os family="windows" />
+	</condition>
+	<condition property="jboss.dir" value="/opt/jboss/current">
+		<os family="unix" />
+	</condition>
+	<echo message="${jboss.dir}" />
+	<property name="jboss.proj.dir" value="${basedir}/jboss/server/osv" />
+	<property name="jboss.deploy.dir" value="${jboss.proj.dir}/deploy" />
+	<property name="jboss.conflib.dir" value="${jboss.proj.dir}/lib" />
+	<property name="jarfile" value="${build.dir}/osv.jar" />
+	<property name="classesJarfile" value="${build.dir}/osv-classes.jar" />
+	<property name="jarfile3" value="${build.dir}/osv3.jar" />
+	<property name="wahltaglib" value="${build.dir}/wahlTagLib.jar" />
+	<property name="warfile" value="${build.dir}/osv.war" />
+
+	<property name="genwebsrc.dir" value="${basedir}/genwebsrc" />
+	<property name="jboss-web.deployer" value="${jboss.deploy.dir}/jboss-web.deployer" />
+	<property name="schema.dir" value="${basedir}/../Eml-kiesraad" />
+	<condition property="properties.srcfile" value="was.properties">
+		<os family="windows" />
+	</condition>
+	<condition property="properties.srcfile" value="was_dist.properties">
+		<os family="unix" />
+	</condition>
+
+	<available classname="org.eclipse.jdt.core.JDTCompilerAdapter" property="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: display_compiler                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="display_compiler" if="build.compiler">
+		<echo>Compiler: ${build.compiler}</echo>
+	</target>
+
+	<!-- TaskDefs -->
+	<fileset id="schemas" dir="${schema.dir}">
+		<include name="**/ElectionDefinition/*.xsd" />
+		<include name="**/EML-v5.0-os/110-electionevent-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/110a-electionevent-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/230-candidatelist-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/510-count-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/630-optionslist-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/kiesraad-eml-restrictions.xsd" />
+		<include name="**/EML-v5.0-os/kiesraad-eml-extensions.xsd" />
+		<include name="**/EML-v5.0-os/emlcore-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/emlexternals-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/xAL-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/xNL-kiesraad-strict.xsd" />
+		<include name="**/EML-v5.0-os/reportgenerator-eml-extensions.xsd" />
+		<include name="**/EML-v5.0-os/external/emltimestamp.xsd" />
+		<include name="**/EML-v5.0-os/external/xmldsig-core-schema.xsd" />
+	</fileset>
+
+	<target name="buildgenerator" description="Compiliert die Generierungs-Tools TableGen und GBAGen">
+		<mkdir dir="${toolsclass.dir}" />
+		<javac destdir="${toolsclass.dir}" classpathref="compile.class.path" debug="on" source="1.6" target="1.6" includeantruntime="false">
+			<src path="${toolssrc.dir}" />
+			<include name="de/ivu/util/tools/**" />
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="${class.dir}" excludes="${class.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: ear_delete_all              
+         ================================= -->
+	<target name="ear_delete_all" description="Deletes all ears from deploy directory">
+		<delete dir="${jboss.deploy.dir}/osvP5.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_CSB.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_HSB.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_PSB.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_PSB_2.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_PSB_3.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_PSB_4.ear" includeemptydirs="true" />
+		<delete dir="${jboss.deploy.dir}/osvP4_PSB_5.ear" includeemptydirs="true" />
+	</target>
+
+
+	<!-- generate the beans, vos, the interfaces and GBA JavaScript file -->
+	<target name="gen" depends="buildgenerator" description="Erstellt die Zugriffsschicht und die GBA-JavaScript-Datei">
+		<java classname="de.ivu.util.tools.tablegen.TableGen" fork="true">
+			<jvmarg value="-Dfile.encoding=ISO-8859-1" />
+			<arg value="-bicdes" />
+			<arg value="${src.dir}/de/ivu/wahl/tablegen.properties" />
+			<classpath>
+				<pathelement path="${toolsclass.dir}" />
+				<path refid="compile.class.path" />
+			</classpath>
+		</java>
+		<java classname="de.ivu.util.tools.gbagen.GBAGen" fork="true">
+			<arg value="${gba_src}" />
+			<arg value="${gba_dest}" />
+			<classpath>
+				<pathelement path="${class.dir}" />
+				<path refid="compile.class.path" />
+			</classpath>
+		</java>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Compile-Target für die Java Quellen                              # -->
+	<!-- #################################################################### -->
+
+	<path id="compile.class.path">
+		<!-- MSC: nicht vorhanden? pathelement location="${basedir}/lib/ivu-utils.jar" /-->
+		<fileset dir="${jboss.conflib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss-web.deployer}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss.dir}/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss.deploy.dir}/ejb3.deployer">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile" depends="display_compiler" description="Übersetzt die Java Quellen">
+		<mkdir dir="${class.dir}" />
+		<javac destdir="${class.dir}" classpathref="compile.class.path" debug="on" source="1.6" target="1.6" encoding="ISO-8859-1" includeantruntime="false">
+
+			<src path="${src.dir}" />
+			<src path="${gensrc.dir}" />
+			<src path="${xmlsecuritysrc.dir}" />
+			<src path="${loggerinterfacesrc.dir}" />
+			<src path="${reportgensrc.dir}" />
+			<src path="${electioncategorysrc.dir}" />
+			<src path="${osv_alg.dir}" />
+
+			<include name="de/**" />
+			<exclude name="**/test/**" />
+			<exclude name="**/*JUnit*.java" />
+		</javac>
+		<copy todir="${class.dir}/">
+			<fileset dir="${src.dir}">
+				<include name="**/*.properties" />
+				<exclude name="add.*/**" />
+			</fileset>
+			<fileset dir="${osv_alg.dir}">
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="${reportgensrc.dir}">
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="${electioncategorysrc.dir}">
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="${reportgenresources.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy todir="${class.dir}/schemas/" flatten="true">
+			<fileset refid="schemas" />
+		</copy>
+		<tstamp>
+			<format property="touch2.time" pattern="dd.MM.yyyy" unit="hour" />
+		</tstamp>
+		<echo file="${class.dir}/build.ts">${touch2.time}</echo>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Erstellung des "build"-Verzeichnisses                            # -->
+	<!-- #################################################################### -->
+	<target name="builddir">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Packs the EJB2.1 classes into a library (JAR)                    # -->
+	<!-- #################################################################### -->
+	<target name="classes-jar" depends="compile, classes-jar_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: classes-jar_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="classes-jar_intern" depends="builddir">
+		<delete file="${classesJarfile}" />
+		<jar jarfile="${classesJarfile}">
+			<zipfileset dir="${class.dir}">
+				<include name="**/*.class" />
+				<include name="**/*.xsd" />
+				<include name="**/*.xslt" />
+				<include name="**/*.TTF" />
+				<include name="**/*.xconf" />
+				<include name="**/*.properties" />
+				<include name="build.ts" />
+				<exclude name="de/ivu/util/tools/**" />
+				<exclude name="**/tablegen.properties" />
+				<exclude name="model/**" />
+				<exclude name="**/*Handling*.class" />
+				<exclude name="**/JMXInvoker*.class" />
+				<exclude name="**/mbean/**/*.class" />
+				<exclude name="was.properties" />
+				<exclude name="was_dist.properties" />
+				<exclude name="**/fopconfig/**" />
+			</zipfileset>
+		</jar>
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Server-Seite der Applikation (JAR)            # -->
+	<!-- #################################################################### -->
+	<target name="jar" depends="compile, jar_intern" description="Erzeugt die Server-Seite der Applikation (JAR)" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: jar_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="jar_intern" depends="classes-jar_intern">
+		<delete file="${jarfile}" />
+		<delete dir="${jarfile}" includeemptydirs="true" />
+		<mkdir dir="${jarfile}" />
+		<copy todir="${jarfile}">
+			<fileset dir="${class.dir}">
+				<include name="**/fopconfig/**" />
+			</fileset>
+			<fileset dir="${src.dir}/add.jar" />
+		</copy>
+		<copy file="${db.create}" todir="${jarfile}" />
+		<xslt style="copyJBossXML.xslt" in="${src.dir}/add.jar/META-INF/jboss.xml" out="${jarfile}/META-INF/jboss.xml" force="true">
+			<param name="program" expression="${program}" />
+			<xmlcatalog>
+				<dtd publicId="-//JBoss//DTD JBOSS 4.2//EN" location="${basedir}/jboss/jboss_4_2.dtd" />
+				<dtd publicid="-//JBoss//DTD Web Service Reference 4.2//EN" location="${basedir}/jboss/service-ref_4_2.dtd" />
+			</xmlcatalog>
+		</xslt>
+		<copy file="${properties.dir}/${program}/${properties.srcfile}" tofile="${jarfile}/was.properties" overwrite="true" />
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Server-Seite der Applikation mit EJB3 (JAR)   # -->
+	<!-- #################################################################### -->
+	<target name="jar3" depends="compile, jar3_intern" description="Erzeugt die Server-Seite der Applikation mit EJB3 (JAR)" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: jar3_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="jar3_intern" depends="builddir">
+		<delete file="${jarfile3}" />
+		<jar jarfile="${jarfile3}">
+			<zipfileset dir="${class.dir}">
+				<include name="**/*Handling*.class" />
+				<include name="**/JMXInvoker*.class" />
+				<include name="**/mbean/**/*.class" />
+				<exclude name="**/mbean/**/*_*.class" />
+			</zipfileset>
+			<fileset dir="${src.dir}/add.jar3" />
+			<zipfileset dir="${class.dir}">
+				<include name="**/mbean/**/${program}__*.class" />
+			</zipfileset>
+		</jar>
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Client-Seite der Applikation (WAR)            # -->
+	<!-- #################################################################### -->
+	<target name="war" depends="builddir" description="Erzeugt die Client-Seite der Applikation (WAR)">
+		<delete file="${warfile}" />
+		<war destfile="${warfile}" webxml="${src.dir}/add.war/WEB-INF/web.xml">
+			<lib dir="${web.lib.dir}">
+				<include name="*.jar" />
+			</lib>
+			<zipfileset dir="${websrc.dir}">
+				<exclude name="WEB-INF/**" />
+			</zipfileset>
+			<zipfileset dir="${websrc.dir}">
+				<include name="WEB-INF/taglib/*.tld" />
+			</zipfileset>
+			<zipfileset dir="${src.dir}/add.war">
+				<exclude name="**/web*.xml" />
+			</zipfileset>
+		</war>
+		<delete dir="${work.dir}/jsp" />
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Applikation P5 (EAR)                          # -->
+	<!-- #################################################################### -->
+	<target name="earP5" description="P5" depends="splash, compile, earP5_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP5_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP5_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P5" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_CSB (EAR)                      # -->
+	<!-- #################################################################### -->
+	<target name="earP4_CSB" description="P4_CSB" depends="splash, compile, earP4_CSB_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_CSB_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_CSB_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_CSB" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_HSB (EAR)                      # -->
+	<!-- #################################################################### -->
+	<target name="earP4_HSB" description="P4_HSB" depends="splash, compile, earP4_HSB_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_HSB_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_HSB_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_HSB" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_PSB (EAR)                      # -->
+	<!-- #################################################################### -->
+	<target name="earP4_PSB" description="P4_PSB" depends="splash, compile, earP4_PSB_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_PSB_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_PSB_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_PSB" />
+		</antcall>
+	</target>
+
+
+	<!-- ###################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_PSB_2 (EAR)                      # -->
+	<!-- ###################################################################### -->
+	<target name="earP4_PSB_2" description="P4_PSB_2" depends="splash, compile, earP4_PSB_2_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_PSB_2_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_PSB_2_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_PSB_2" />
+		</antcall>
+	</target>
+
+
+	<!-- ###################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_PSB_3 (EAR)                      # -->
+	<!-- ###################################################################### -->
+	<target name="earP4_PSB_3" description="P4_PSB_3" depends="splash, compile, earP4_PSB_3_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_PSB_3_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_PSB_3_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_PSB_3" />
+		</antcall>
+	</target>
+
+
+	<!-- ###################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_PSB_4 (EAR)                      # -->
+	<!-- ###################################################################### -->
+	<target name="earP4_PSB_4" description="P4_PSB_4" depends="splash, compile, earP4_PSB_4_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_PSB_4_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_PSB_4_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_PSB_4" />
+		</antcall>
+	</target>
+
+
+	<!-- ###################################################################### -->
+	<!-- # Target erzeugt die Applikation P4_PSB_5 (EAR)                      # -->
+	<!-- ###################################################################### -->
+	<target name="earP4_PSB_5" description="P4_PSB_5" depends="splash, compile, earP4_PSB_5_intern" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: earP4_PSB_5_intern                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="earP4_PSB_5_intern">
+		<antcall target="earDeploy_intern">
+			<param name="program" value="P4_PSB_5" />
+		</antcall>
+	</target>
+
+
+	<!-- ================================= 
+          target: ear_build_all              
+         ================================= -->
+	<target name="ear_build_all" depends="splash, compile, earP4_CSB_intern, earP4_HSB_intern, earP4_PSB_intern, earP4_PSB_2_intern, earP4_PSB_3_intern, earP4_PSB_4_intern, earP4_PSB_5_intern, earP5_intern" description="Building all programs at once" />
+
+
+	<!-- #################################################################### -->
+	<!-- # Target deployt die Applikation (EAR)                             # -->
+	<!-- #################################################################### -->
+	<target name="earDeploy_intern" depends="ear_core_intern">
+		<delete file="${jboss.deploy.dir}/${earname}" />
+		<delete dir="${jboss.deploy.dir}/${earname}" includeemptydirs="true" failonerror="false" />
+		<copy todir="${jboss.deploy.dir}">
+			<fileset dir="${earfile}/..">
+				<include name="${earname}/**" />
+			</fileset>
+		</copy>
+		<antcall target="end" />
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Applikation (EAR)                             # -->
+	<!-- #################################################################### -->
+	<target name="ear_core_intern">
+		<parallel threadsperprocessor="1">
+			<antcall target="war" />
+			<antcall target="jar3_intern" />
+			<antcall target="jar_intern" />
+		</parallel>
+
+		<property name="earname" value="osv${program}.ear" />
+		<property name="earfile" value="${build.dir}/${earname}" />
+
+		<delete dir="${earfile}" includeemptydirs="true" />
+		<mkdir dir="${earfile}" />
+
+		<echo>Build EAR: ${earfile}</echo>
+		<copy todir="${earfile}">
+			<fileset dir="${build.dir}">
+				<include name="osv*.jar/**" />
+				<include name="osv.war" />
+			</fileset>
+		</copy>
+		<xslt style="copyApplicationXML.xslt" in="${src.dir}/add.ear/META-INF/application.xml" out="${earfile}/META-INF/application.xml" force="true">
+			<param name="program" expression="${program}" />
+			<xmlcatalog>
+				<entity publicid="http://java.sun.com/xml/ns/javaee" location="${basedir}/jboss/application_5.xsd" />
+			</xmlcatalog>
+		</xslt>
+	</target>
+
+	<!-- ================================= 
+          target: dist_local              
+         ================================= -->
+	<target name="dist_local" depends="splash" description="--> Erzeugt Distribution für Localhost">
+		<antcall target="dist">
+			<param name="server" value="localhost" />
+		</antcall>
+	</target>
+
+
+	<!-- ================================= 
+          target: dist_d2tewahl > Erzeugt Distribution für d2tewahl
+         ================================= -->
+	<target name="dist_d2tewahl">
+		<antcall target="dist">
+			<param name="server" value="d2tewahl" />
+		</antcall>
+	</target>
+
+
+	<!-- #################################################################### -->
+	<!-- # Target erzeugt die Distribution                                  # -->
+	<!-- #################################################################### -->
+	<target name="dist" depends="keygen">
+		<copy todir="${src.dir}/add.dist" overwrite="true" flatten="true">
+			<fileset dir="${websrc.dir}" id="id">
+				<include name="FAVICON.ICO" />
+				<include name="ivu.gif" />
+				<include name="kiesraad.gif" />
+				<include name="logo-ivu.gif" />
+			</fileset>
+		</copy>
+
+		<mkdir dir="${dist.dir}" />
+		<delete file="${distfile}" />
+		<echo>Build Dist: ${distfile}</echo>
+		<zip zipfile="${distfile}">
+			<zipfileset dir="${jboss.proj.dir}" prefix="osv">
+				<include name="conf/**" />
+				<exclude name="conf/jboss-log4j.xml" />
+				<exclude name="conf/keystore" />
+				<include name="lib/**" />
+				<exclude name="lib/p6spy.jar" />
+				<exclude name="lib/derbyclient.jar" />
+				<exclude name="lib/mysql-connector-java-*.jar" />
+				<include name="deploy/**" />
+				<exclude name="deploy/derby-ds.xml" />
+				<exclude name="deploy/derby-extern-ds.xml" />
+				<exclude name="deploy/osv*.ear/**" />
+				<exclude name="deploy/jboss-web.deployer/server.xml" />
+				<exclude name="deploy/jboss-web.deployer/ROOT.war/**" />
+				<exclude name="deploy/http-invoker.sar/**" />
+				<exclude name="deploy/jbossws.sar/**" />
+				<exclude name="deploy/jms/**" />
+				<exclude name="deploy/jmx-console.war/**" />
+				<exclude name="deploy/management/**" />
+				<exclude name="deploy/uuid-key-generator.sar/**" />
+				<exclude name="ds/*" />
+			</zipfileset>
+			<zipfileset dir="${src.dir}/add.dist" prefix="osv" />
+			<zipfileset dir="${dist.dir}" prefix="osv/conf">
+				<include name="keystore" />
+			</zipfileset>
+		</zip>
+	</target>
+
+	<target name="end">
+		<tstamp>
+			<format property="touch.time" pattern="HH:mm" unit="hour" />
+		</tstamp>
+		<echo>Build Time: ${touch.time}</echo>
+	</target>
+
+	<!-- ================================= 
+          target: src              
+         ================================= -->
+	<target name="src" depends="" description="Erstellt aus dem CVS-Inhalt des Projekts ein Archiv mit Quellen">
+		<property name="project" value="osv45" />
+
+		<mkdir dir="${dist.dir}" />
+
+		<delete dir="${java.io.tmpdir}${project}" />
+
+		<cvs cvsroot=":pserver:${user.name}@lotte:/opt/cvs" command="export" package="${project}" dest="${java.io.tmpdir}" tag="HEAD" />
+
+		<tar destfile="${dist.dir}/src.tar.bz2" compression="bzip2">
+			<tarfileset dir="${java.io.tmpdir}">
+				<include name="${project}/**" />
+			</tarfileset>
+		</tar>
+
+		<delete dir="{java.io.tmpdir}/${project}" includeemptydirs="true" />
+	</target>
+
+	<!-- ================================= 
+          target: keygen > Generiert aktuelle Self-Signed-Zertifikate             
+         ================================= -->
+	<target name="keygen">
+		<mkdir dir="${dist.dir}" />
+		<property name="keystore" value="${dist.dir}/keystore" />
+		<delete file="${keystore}" />
+		<echo>Server: ${server}</echo>
+		<genkey alias="tomcat" storepass="changeit" keypass="changeit" keyalg="RSA" dname="CN=${server}" keystore="${keystore}" keysize="4096" verbose="true" validity="1461" sigalg="SHA1withRSA" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby_test_start                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby_test_start" unless="db.nostartstop">
+		<antcall target="derby_start" />
+	</target>
+
+
+	<!-- ================================= 
+          target: derby_start              
+         ================================= -->
+	<target name="derby_start" description="Startet Derby als TCP Dienst">
+		<antcall target="derby_server">
+			<param name="dbname" value="osv" />
+			<param name="cmd2" value="start" />
+		</antcall>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby_test_shutdown2                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby_test_shutdown2" unless="db.nostartstop">
+		<antcall target="derby_shutdown" />
+	</target>
+
+
+	<!-- ================================= 
+          target: derby_shutdown              
+         ================================= -->
+	<target name="derby_shutdown" description="Stoppt Derby als TCP Dienst">
+		<antcall target="derby_server">
+			<param name="cmd2" value="shutdown" />
+		</antcall>
+		<sleep seconds="4" />
+		<!-- repeat until its really really dead -->
+		<antcall target="derby_test_shutdown1" />
+	</target>
+
+	<!-- ================================= 
+          target: drop_all              
+         ================================= -->
+	<target name="drop_all" description="Drops all DBs">
+		<antcall target="derby_test_shutdown1" />
+		<antcall target="drop_db_core">
+			<param name="program" value="P5" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_CSB" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_HSB" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_PSB" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_PSB_2" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_PSB_3" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_PSB_4" />
+		</antcall>
+		<antcall target="drop_db_core">
+			<param name="program" value="P4_PSB_5" />
+		</antcall>
+		<antcall target="derby_test_start" />
+	</target>
+
+
+
+	<!-- #################################################################### -->
+	<!-- # Datenbank löschen P5                                             # -->
+	<!-- #################################################################### -->
+	<target name="drop_dbP5" description="Datenbank löschenP5">
+		<antcall target="drop_db">
+			<param name="program" value="P5" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Datenbank löschen P4_CSB                                         # -->
+	<!-- #################################################################### -->
+	<target name="drop_dbP4_CSB" description="Datenbank löschen P4_CSB">
+		<antcall target="drop_db">
+			<param name="program" value="P4_CSB" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Datenbank löschen P4_HSB                                         # -->
+	<!-- #################################################################### -->
+	<target name="drop_dbP4_HSB" description="Datenbank löschen P4_HSB">
+		<antcall target="drop_db">
+			<param name="program" value="P4_HSB" />
+		</antcall>
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Datenbank löschen P4_PSB                                         # -->
+	<!-- #################################################################### -->
+	<target name="drop_dbP4_PSB" description="Datenbank löschen P4_PSB">
+		<antcall target="drop_db">
+			<param name="program" value="P4_PSB" />
+		</antcall>
+	</target>
+
+	<!-- ###################################################################### -->
+	<!-- # Datenbank löschen P4_PSB_2                                         # -->
+	<!-- ###################################################################### -->
+	<target name="drop_dbP4_PSB_2" description="Datenbank löschen P4_PSB_2">
+		<antcall target="drop_db">
+			<param name="program" value="P4_PSB_2" />
+		</antcall>
+	</target>
+
+	<!-- ###################################################################### -->
+	<!-- # Datenbank löschen P4_PSB_3                                         # -->
+	<!-- ###################################################################### -->
+	<target name="drop_dbP4_PSB_3" description="Datenbank löschen P4_PSB_3">
+		<antcall target="drop_db">
+			<param name="program" value="P4_PSB_3" />
+		</antcall>
+	</target>
+
+	<!-- ###################################################################### -->
+	<!-- # Datenbank löschen P4_PSB_4                                         # -->
+	<!-- ###################################################################### -->
+	<target name="drop_dbP4_PSB_4" description="Datenbank löschen P4_PSB_4">
+		<antcall target="drop_db">
+			<param name="program" value="P4_PSB_4" />
+		</antcall>
+	</target>
+
+	<!-- ###################################################################### -->
+	<!-- # Datenbank löschen P4_PSB_5                                         # -->
+	<!-- ###################################################################### -->
+	<target name="drop_dbP4_PSB_5" description="Datenbank löschen P4_PSB_5">
+		<antcall target="drop_db">
+			<param name="program" value="P4_PSB_5" />
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+          target: drop_db              
+         ================================= -->
+	<target name="drop_db">
+		<antcall target="derby_test_shutdown1" />
+		<antcall target="drop_db_core">
+			<param name="program" value="${program}" />
+		</antcall>
+		<antcall target="derby_test_start" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby_test_shutdown1                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby_test_shutdown1">
+		<condition property="db.nostartstop">
+			<not>
+				<or>
+					<available file="${db.dir}/osv-${program}/db.lck" />
+					<socket server="localhost" port="1527" />
+				</or>
+			</not>
+		</condition>
+		<antcall target="derby_test_shutdown2" />
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: drop_db_core                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="drop_db_core">
+		<property name="dbname" value="osv-${program}" />
+		<delete includeemptydirs="yes">
+			<fileset dir="${db.dir}">
+				<include name="osv-${program}/**" />
+			</fileset>
+		</delete>
+		<echo>DataBase dropped</echo>
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: chkdb                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="chkdb">
+		<available file="${db.dir}/osv" property="db.notRequired" type="dir" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby_cond_create_db              
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby_cond_create_db" depends="chkdb" unless="db.notRequired">
+		<echo>Creating DataBase Schema</echo>
+		<antcall target="derby">
+			<param name="cmd1" value="ij" />
+			<param name="cmd2" value="${db.create}" />
+		</antcall>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby_server                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby_server">
+		<antcall target="derby">
+			<param name="cmd1" value="server" />
+		</antcall>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: derby                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="derby">
+		<java fork="true" jar="${lib.dir}\derbyrun.jar" dir="${db.dir}">
+			<jvmarg value="-Dij.protocol=jdbc:derby://localhost:1527/" />
+			<jvmarg value="-Dij.database=${dbname};create=true" />
+			<arg value="${cmd1}" />
+			<arg value="${cmd2}" />
+		</java>
+	</target>
+
+	<target name="splash" unless="jenkins.build">
+		<splash showduration="0" />
+	</target>
+
+	<!-- #################################################################### -->
+	<!-- # Aktualisieren der mysql-Datenbank für tableGen                   # -->
+	<!-- #################################################################### -->
+
+	<path id="mysql.path">
+		<pathelement location="${jboss.proj.dir}/lib/mysql-connector-java-5.1.6-bin.jar" />
+	</path>
+
+	<target name="mysql.drop">
+
+		<sql driver="${driver}" url="${url}" userid="${username}" password="${password}" classpathref="mysql.path" onerror="continue">
+         drop database ${catalog};
+      </sql>
+
+	</target>
+
+	<target name="mysql.create" depends="mysql.drop">
+
+		<sql driver="${driver}" url="${url}" userid="${username}" password="${password}" classpathref="mysql.path">
+         create database ${catalog};
+      </sql>
+
+	</target>
+
+	<target name="mysql.recreate" depends="mysql.drop, mysql.create" description="Recreate mysql database used for tablegen">
+
+		<sql src="${db.create.mysql}" driver="${driver}" url="${url}" userid="${username}" password="${password}" classpathref="mysql.path">
+         use ${catalog};
+       </sql>
+	</target>
+
+
+	<target name="jenkins" depends="gen, ear_build_all, ear_zip_all, dist_d2tewahl, static, alg_test" />
+
+	<property name="cobertura.home" value="lib.code.quality/cobertura/cobertura-1.9.3" />
+	<path id="cobertura.path">
+		<fileset dir="${cobertura.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="build.cobertura.classpath">
+		<path refid="compile.class.path" />
+		<path refid="cobertura.path" />
+	</path>
+
+	<taskdef classpathref="cobertura.path" resource="tasks.properties" />
+
+	<target name="alg_test">
+
+		<javac destdir="${class.dir}" debug="on" source="1.6" target="1.6" encoding="ISO-8859-1" includeantruntime="false">
+
+			<classpath refid="compile.class.path" />
+			<classpath>
+				<pathelement location="class.dir" />
+			</classpath>
+			<classpath>
+				<fileset dir="${basedir}/lib.code.quality/junit">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<src path="${osv45_test.dir}" />
+
+			<include name="de/**" />
+			<exclude name="**/*JUnit*.java" />
+		</javac>
+		<copy todir="${class.dir}/">
+			<fileset dir="${osv45_test.dir}">
+				<include name="**/*.xls" />
+			</fileset>
+		</copy>
+
+		<delete file="cobertura.ser" />
+
+		<cobertura-instrument>
+			<fileset dir="${class.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</cobertura-instrument>
+
+
+		<junit printsummary="yes" haltonfailure="yes" fork="true">
+			<classpath refid="build.cobertura.classpath" />
+			<classpath>
+				<pathelement location="${class.dir}" />
+			</classpath>
+			<classpath>
+				<fileset dir="${basedir}/lib.code.quality/junit">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<formatter type="plain" />
+
+			<test name="de.ivu.wahl.result.test.testcases.GenerateAndRunExcelTestCases" haltonfailure="yes" outfile="junit-test-result">
+				<formatter type="xml" />
+			</test>
+
+		</junit>
+		<!-- Code coverage -->
+		<cobertura-report format="xml" destdir="${basedir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${gensrc.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${xmlsecuritysrc.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${loggerinterfacesrc.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${reportgensrc.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${electioncategorysrc.dir}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${osv_alg.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</cobertura-report>
+
+
+
+	</target>
+
+	<target name="ear_zip_all">
+		<zip destfile="${build.dir}/osvP4_CSB.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_CSB.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_HSB.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_HSB.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_PSB.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_PSB.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_PSB_2.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_PSB_2.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_PSB_3.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_PSB_3.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_PSB_4.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_PSB_4.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP4_PSB_5.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP4_PSB_5.ear/**/" />
+			</fileset>
+		</zip>
+		<zip destfile="${build.dir}/osvP5.ear.zip">
+			<fileset dir="${build.dir}">
+				<include name="osvP5.ear/**/" />
+			</fileset>
+		</zip>
+	</target>
+
+
+	<!-- Code Quality -->
+
+	<property name="lib.code.quality.dir" value="${basedir}/lib.code.quality" />
+	<property name="report.dir" value="${basedir}/report-code-quality" />
+
+	<property name="findbugs.home" value="${lib.code.quality.dir}/findbugs/findbugs-1.3.8" />
+	<property name="pmd.home" value="${lib.code.quality.dir}/pmd/pmd-4.2.5" />
+	<property name="checkstyle.home" value="${lib.code.quality.dir}/checkstyle/checkstyle-5.0" />
+
+	<path id="findbugs.path">
+		<fileset dir="${findbugs.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="pmd.path">
+		<fileset dir="${pmd.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="checkstyle.path">
+		<fileset dir="${checkstyle.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+
+	<target name="static" depends="init.static,cpd,checkstyle,pmd,findbugs" />
+
+	<target name="init.static">
+		<mkdir dir="${report.dir}" />
+	</target>
+
+	<target name="checkstyle">
+		<taskdef resource="checkstyletask.properties" classpathRef="checkstyle.path" />
+
+		<checkstyle classpathRef="compile.class.path" failOnViolation="false" config="${lib.code.quality.dir}/CheckStyle_Rules.xml">
+			<fileset dir="${src.dir}" includes="**/*.java" />
+			<fileset dir="${gensrc.dir}" includes="**/*.java" />
+			<fileset dir="${xmlsecuritysrc.dir}" includes="**/*.java" />
+			<fileset dir="${loggerinterfacesrc.dir}" includes="**/*.java" />
+			<fileset dir="${reportgensrc.dir}" includes="**/*.java" />
+			<fileset dir="${electioncategorysrc.dir}" includes="**/*.java" />
+			<fileset dir="${osv_alg.dir}" includes="**/*.java" />
+			<formatter type="xml" toFile="${report.dir}/checkstyle.xml" />
+			<!-- formatter type="plain" toFile="${report.dir}/checkstyle.txt" /> -->
+		</checkstyle>
+
+	</target>
+
+	<target name="findbugs">
+		<description> 
+	  				findbugs
+	  			</description>
+
+		<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathRef="findbugs.path" />
+
+		<findbugs home="${findbugs.home}" output="xml" outputFile="${report.dir}/findbugs.xml" jvmargs="-Xmx512M" excludeFilter="${lib.code.quality.dir}/findbugsexclude.xml">
+			<auxClasspath refId="compile.class.path" />
+			<sourcePath>
+				<pathelement path="${src.dir}" />
+				<pathelement path="${gensrc.dir}" />
+				<pathelement path="${xmlsecuritysrc.dir}" />
+				<pathelement path="${loggerinterfacesrc.dir}" />
+				<pathelement path="${reportgensrc.dir}" />
+				<pathelement path="${electioncategorysrc.dir}" />
+				<pathelement path="${osv_alg.dir}" />
+			</sourcePath>
+			<class location="${jarfile}" />
+			<class location="${classesJarfile}" />
+			<class location="${jarfile3}" />
+		</findbugs>
+	</target>
+
+	<target name="pmd">
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask" classpathRef="pmd.path" />
+		<pmd rulesetfiles="rulesets/imports.xml,rulesets/unusedcode.xml,rulesets/basic.xml">
+			<formatter type="xml" toFile="${report.dir}/pmd.xml" />
+			<!-- formatter type="html" toFile="${report.dir}/pmd.html" /-->
+			<fileset dir="${src.dir}" includes="**/*.java" />
+			<fileset dir="${gensrc.dir}" includes="**/*.java" />
+			<fileset dir="${xmlsecuritysrc.dir}" includes="**/*.java" />
+			<fileset dir="${loggerinterfacesrc.dir}" includes="**/*.java" />
+			<fileset dir="${reportgensrc.dir}" includes="**/*.java" />
+			<fileset dir="${electioncategorysrc.dir}" includes="**/*.java" />
+			<fileset dir="${osv_alg.dir}" includes="**/*.java" />
+		</pmd>
+
+	</target>
+
+	<target name="cpd">
+		<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathRef="pmd.path" />
+		<cpd minimumTokenCount="100" format="xml" outputFile="${report.dir}/cpd.xml">
+			<fileset dir="${src.dir}" includes="**/*.java" />
+			<fileset dir="${xmlsecuritysrc.dir}" includes="**/*.java" />
+			<fileset dir="${loggerinterfacesrc.dir}" includes="**/*.java" />
+			<fileset dir="${reportgensrc.dir}" includes="**/*.java" />
+			<fileset dir="${electioncategorysrc.dir}" includes="**/*.java" />
+			<fileset dir="${osv_alg.dir}" includes="**/*.java" />
+		</cpd>
+	</target>
+
+</project>

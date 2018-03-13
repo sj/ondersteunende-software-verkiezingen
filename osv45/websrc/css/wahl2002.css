@@ -1,0 +1,723 @@
+body {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: black;
+}
+
+.status{
+	height:150px;
+	left:200px;
+	position:fixed;
+	top:80px;
+	width:400px;
+	z-index:10;
+}
+* html .status {
+	position: absolute;
+	top:170px; 
+	left:130px; 
+	width:400px; 
+	height:150px;
+}
+.trans {
+  -moz-opacity:0.5;
+}
+
+
+* html body {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: black;
+	overflow: auto;
+}
+
+html+body {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: black;
+	overflow: auto;
+}
+
+#erg td {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: #093C69;
+	padding-top: 0px; 
+	padding-bottom: 0px;
+}
+input.erg {
+	padding-top: 0px; 
+	padding-bottom: 0px;
+	font-size:10px;
+	text-align: right;
+}
+input.ergdisable {
+	padding-top: 0px; 
+	padding-bottom: 0px;
+	font-size: 10px;
+	background: lightgrey;
+}
+
+input.bordercolorWahlberechtigte {
+	border-color: #8F6E36;
+	border-width: 3px;
+}
+
+input.readonlyWahlberechtigte {
+	background-color: #E0DFE3;
+	border: 0 none;
+	color: #8F6E36;
+}
+
+td {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: #093C69;
+}
+
+td.einrue div.einrue {
+  width:65%;
+  text-align: right;
+   }
+   
+th {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+	color: #093C69;
+}
+
+p {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	color: black;
+}
+
+h1 {
+	font-size: 19px;
+	line-height: 20px;
+	color: black;
+}
+
+h2 {
+	font-size: 17px;
+	line-height: 18px;
+	color: black;
+}
+
+h3 {
+	font-size: 13px;
+	line-height: 14px;
+	color: black;
+}
+
+/* Konfigurationsstring */
+.klein {
+	font-size: 11px;
+	font-family: inherit;
+	padding-left: 5px;
+	color: #300;
+}
+
+.hgweiss {
+	background-color: white;
+}
+
+.hgweisshervorg {
+	background-color: white;
+	font-weight: bold;
+	color: red;
+}
+
+/* Linien in befehl.jsp */
+.hggrau {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #F9FAFD;
+	color: #093C69;
+}
+
+.rot {
+	font-size: 1.1em;
+	font-weight: bold;
+	color: red !important;
+}
+
+.hggrau2 {
+	background-color: #E0DFE3 !important;
+}
+
+/* Linie in navigation.jsp */
+.hgdklgrau {
+	font-size: 11px;
+	background-color: white;
+}
+
+.hgeeeeee {
+	background-color: #E0DFE3;
+}
+
+.hgeeeeeehervorg {
+	background-color: #E0DFE3;
+	font-weight: bold;
+	color: red;
+}
+
+.negativ {
+	color: red;
+}
+
+.hgschwarz {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	background-color: #C4974B;
+}
+
+.hgdunkel {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	background-color: #666;
+	color: white !important;
+}
+
+.hgrot {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #093C69;
+	color: white !important;
+}
+
+.hghell {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 11px;
+	background-color: #E3E6ED;
+	color: #093C69 !important;
+}
+
+.hgheller {
+	background-color: #F2F2F2;
+}
+
+.hgformular {
+	background-color: #E0DFE3;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	font-weight: bold;
+	color: white;
+}
+
+/* 3. Ebene der Navigation: Hintergrundfarbe */
+.hgnavi {
+	background-color: #BBBBBA;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	color: black;
+}
+
+/* Hintergrund oben in befehl.jsp */
+.hgoben {
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 10px;
+	font-variant: small-caps;
+	background-color: #C4974B;
+	color: white;
+}
+
+a:link,a:active,a:visited {
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	color: #093C69;
+	text-decoration: none;
+}
+
+/* Link 'Nachrichten', 'Administration' in navigation.jsp */
+.linkhell {
+	font-family: Arial, Helvetica, Verdana;
+	color: white;
+}
+
+.linkdunkel {
+	font-family: Arial, Helvetica, Verdana;
+	color: #333;
+}
+
+.linkrot {
+	font-family: Arial, Helvetica, Verdana;
+	color: #600;
+}
+
+/* Link zum Drucken der Seite */
+.linkdklrot {
+	font-family: Arial, Helvetica, Verdana;
+	color: #300;
+	padding-right: 4px;
+}
+
+/* Überschrift in befehl.jsp: Bund/Land/Wahlkreis/Nachrichten usw. */
+.schriftrot {
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	color: #093C69;
+}
+
+.schriftweiss {
+	font-family: Verdana, Helvetica;
+	font-size: 11px;
+	color: white;
+}
+
+/* in navigation.jsp vor den Einträgen */
+.abstand1 {
+	padding-left: 1px;
+}
+
+/* in navigation.jsp vor den Einträgen */
+.abstand4 {
+	padding-left: 4px;
+}
+
+/* in befehl.jsp Menü-Leiste oben */
+.abstand15 {
+	padding-left: 15px;
+}
+
+/* in navigation.jsp vor den Einträgen */
+.abstand18 {
+	padding-left: 18px;
+}
+
+.guiBefehle a, .guiBefehle span {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 6px;
+	padding-right: 5px;
+	border-right: 1px solid #CCC;
+	margin-top: 1px;
+	text-align: justify;
+	white-space: nowrap;
+	display: run-in;
+	float: left;
+}
+
+.guiBefehle a:hover,a:focus {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_1, span.guiBefehl_1 {
+	color: white !important;
+	font-weight: bold;
+	background: #093C69;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_2 {
+	color: white !important;
+	font-weight: bold;
+	background: #093C69;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_3 {
+	color: white !important;
+	background: #966;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_4 {
+	color: white !important;
+	background: #C00;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_5 {
+	color: black !important;
+	background: #D08989;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_6 {
+	color: white !important;
+	font-weight: bold;
+	background: #0047B6;
+}
+
+/* Navigationsleiste in befehl.jsp */
+a.guiBefehl_selected {
+	color: white !important;
+	background: #C4974B;
+	font-weight: bold;
+}
+
+/* Kästchen in Wahlkreisstatus, Mehrheitswechsel */
+#box {
+	color: black;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 5px;
+	padding-right: 3px;
+	background: white;
+	border-left: 1px solid #666;
+	border-bottom: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #666;
+	text-align: justify;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	text-decoration: none;
+	display: block;
+	float: left;
+}
+
+/* Absende-Buttons: z.B. gebietEingang.jsp */
+#box2 {
+	color: white;
+	background: #0047B6;
+	border-left: 1px solid #CCC;
+	border-bottom: 1px solid #093C69;
+	border-right: 1px solid #093C69;
+	border-top: 1px solid #CCC;
+	text-align: center;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	cursor: pointer;
+	width: inherit;
+}
+#box2a {
+	color: white;
+	background: #0047B6;
+	border-left: 1px solid #CCC;
+	border-bottom: 1px solid #093C69;
+	border-right: 1px solid #093C69;
+	border-top: 1px solid #CCC;
+	text-align: center;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	cursor: pointer;
+	width: inherit;
+	padding-left: 10px; 
+	padding-right: 10px;
+}
+.box2a {
+	color: white;
+	background: #0047B6;
+	border-left: 1px solid #CCC;
+	border-bottom: 1px solid #093C69;
+	border-right: 1px solid #093C69;
+	border-top: 1px solid #CCC;
+	text-align: center;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	cursor: pointer;
+	width: inherit;
+	padding-left: 10px; 
+	padding-right: 10px;
+}
+
+
+/* Buttons in Telefonformulare.jsp und Testmaterial.jsp */
+#box3 {
+	color: #FFFFFF;
+	background: #666666;
+	border-left: 1px solid #CCCCCC;
+	border-bottom: 1px solid #333333;
+	border-right: 1px solid #333333;
+	border-top: 1px solid #CCCCCC;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 6px;
+	padding-right: 6px;
+	text-align: center;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+/* in: nachricht_Schreiben. jsp */
+.textfeld {
+	background-color: white;
+	border: 2px dotted #600;
+}
+
+/* Warnfenster: gebietEingang.jsp -> Muss-Fehler */
+#layer1 {
+	position: absolute;
+	width: 330px;
+	height: 100px;
+	padding-left: 5px;
+	padding-right: 3px;
+	text-align: left;
+	background-color: white;
+	overflow: auto;
+	border: 3px solid red;
+	right: 25px;
+	top: 10px;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 12px;
+}
+
+/* Warnfenster: gebietEingang.jsp -> Kann-Fehler */
+#layer1b {
+	position: absolute;
+	width: 330px;
+	height: 100px;
+	padding-left: 6px;
+	padding-right: 3px;
+	text-align: left;
+	background-color: #FC6;
+	overflow: auto;
+	border: 1px solid black;
+	right: 25px;
+	top: 10px;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 12px;
+}
+
+/* Warnfenster: gebietEingang.jsp -> Muss-Fehler */
+#layer1c {
+	position: absolute;
+	width: 415px;
+	height: 124px;
+	padding-left: 6px;
+	padding-right: 3px;
+	text-align: left;
+	background-color: red;
+	overflow: auto;
+	border: 1px solid black;
+	right: 20px;
+	top: 16px;
+	font-family: Arial, Helvetica, Verdana;
+	font-size: 12px;
+}
+
+/* Zeit u. Anzahl der eingegangenenen Wahlkreise */
+.layer3 {
+	color: #330000;
+	font-family: Arial;
+	padding-top: 0px;
+	padding-left: 4px;
+	padding-right: 5px;
+	margin-right: 1px;
+	font-size: 10px;
+}
+
+/* gebietEingang.jsp -> oben links */
+#layer4 {
+	position: absolute;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	padding: 5px;
+	text-align: left;
+	overflow: auto;
+	margin-bottom: 10px;
+	font-family: Arial, Helvetica, Verdana;
+}
+
+/* befehl.jsp: Wahlbezeichnung*/
+#layer5 {
+	font-size: 10pt;
+	letter-spacing: 2pt;
+	font-variant: small-caps;
+	color: #093C69;
+	font-family: Verdana, Helvetica;
+}
+
+/* sitzverteilungBund.jsp -> Besonderheiten */
+#layer6 {
+	border: 1px dashed #CCC;
+	padding: 10px;
+	height: 100%;
+	margin-top: 10px;
+	text-align: left;
+	width: 100%;
+	background-color: #FAFAFA;
+	font-family: Arial, Helvetica, Verdana;
+}
+
+/* in bErgebnis.jsp, lErgebnis.jsp, gebietErgebnis.jsp: Meldung 'kein Ergebnis' */
+.kErgebnis {
+	color: #C00;
+	text-transform: uppercase;
+	font-family: Arial, Helvetica, Verdana;
+	font-weight: normal;
+}
+
+/*fuer navigationstree:*/
+/*Style für die level der Navigation*/
+.navi {
+	width: 100%;
+	overflow: hidden;
+}
+
+.navi span, .navi a {
+	padding: 1px 1px;
+	display: block;
+	border-bottom: 1px solid #CCC;
+}
+
+.navi a:hover,.navi a:active {
+	text-decoration: underline;
+}
+
+.level1 span, .level1 a {
+	background-color: #CCC;
+	background-image: url('/img/icon/pfeil_down.gif');
+	background-repeat: no-repeat;
+	text-indent: 19px;
+	line-height: 17px;
+	border-bottom-color: #DDD;
+	text-decoration: none;
+}
+
+.level1 a:link {
+	color: #333;
+}
+
+.level1 a:active {
+	background-color: #CCC;
+}
+
+.level1 #current,.level1 a:hover {
+	color: #093C69;
+	background-color: #CCC;
+}
+
+.level2 a {
+	background-color: #E0DFE3;
+	padding-left: 12px;
+}
+
+.level2 a:link {
+	color: #093C69;
+}
+
+.level2 a:active {
+	background-color: #C4974B;
+}
+
+.level2 #current,.level2 a:hover {
+	color: #093C69;
+	background-color: #FFFFFF;
+}
+
+.level3 a {
+	background-color: #E0DFE3;
+	padding-left: 6px;
+}
+
+.level3 a:link {
+	color: #CCC;
+}
+
+.level3 a:visited {
+	color: #AAA;
+}
+
+.level3 #current,.level3 a:hover,.level3 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.level4 a {
+	background-color: #333;
+	padding-left: 9px;
+}
+
+.level4 a:link {
+	color: #CCC;
+}
+
+.level4 a:visited {
+	color: #AAA;
+}
+
+.level4 #current,.level4 a:hover,.level4 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.level5 a {
+	background-color: #CCC;
+	padding-left: 12px;
+}
+
+.level5 a:link {
+	color: #333;
+}
+
+.level5 #current,.level5 a:hover,.level5 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.level6 a {
+	background-color: #999;
+	padding-left: 15px;
+}
+
+.level6 a:link {
+	color: #333;
+}
+
+.level6 #current,.level6 a:hover,.level6 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.level7 a {
+	background-color: #666;
+	padding-left: 18px;
+}
+
+.level7 a:link {
+	color: #CCC;
+}
+
+.level7 #current,.level7 a:hover,.level7 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.level8 a {
+	background-color: #333;
+	padding-left: 21px;
+}
+
+.level8 a:link {
+	color: #CCC;
+}
+
+.level8 #current,.level8 a:hover,.level8 a:active {
+	color: #333;
+	background-color: #EBEBEB;
+}
+
+.newMail {
+	background-image: url("/img/icon/nachricht.gif");
+	background-position: 176px 4px;
+	background-repeat: no-repeat;
+}
+
+.warningMessage {
+	color: #FF8900;
+}
+
+.eingangKategorie td {
+	height: 24px;
+}
+
+.eingangKategorie span {
+	color: #777;
+}
+
+@media print {
+	.print-hidden {
+		display: none;
+	}
+}

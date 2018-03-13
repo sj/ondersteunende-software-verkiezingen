@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Loggerinterface Plug-in
+Bundle-SymbolicName: de.ivu.wahl.wus.loggerinterface
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: IVU Traffic Technologies AG
+Export-Package: de.ivu.wahl.wus.loggerinterface
