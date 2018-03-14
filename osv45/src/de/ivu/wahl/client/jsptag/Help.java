@@ -57,7 +57,7 @@ public class Help extends TagSupport {
   @Override
   public int doStartTag() {
     try {
-      String contextPath = pageContext.getServletContext().getContextPath();
+      String contextPath = ""; // pageContext.getServletContext().getContextPath();
       HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
       HttpServletResponse response = (HttpServletResponse) pageContext.getResponse();
 
