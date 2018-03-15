@@ -1,3 +1,7 @@
+path_classifiers:
+  generated:
+    - "osv45/gensrc"
+
 extraction:
   java:
     index:
