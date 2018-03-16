@@ -1,6 +1,9 @@
 path_classifiers:
   generated:
     - "osv45/gensrc"
+  library:
+    - "osv45/websrc/js/jquery-*"
+    - "osv45/websrc/js/entropizer.js"
 
 extraction:
   java:
