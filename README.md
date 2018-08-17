@@ -1,3 +1,5 @@
+[![License: unknown](https://img.shields.io/badge/license-unknown-red.svg)](https://www.kiesraad.nl/verkiezingen/osv-en-eml/ondersteunende-software-verkiezingen-osv)
+
 ## What is this?
 This repository contains the source code of "OSV broncode programma 4 en 5 versie 2.21.4" as downloaded from kiesraad.nl on 13 March 2018.
 
