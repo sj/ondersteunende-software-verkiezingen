@@ -1,4 +1,6 @@
 [![License: unknown](https://img.shields.io/badge/license-unknown-red.svg)](https://www.kiesraad.nl/verkiezingen/osv-en-eml/ondersteunende-software-verkiezingen-osv)
+[![Code Quality: Java](https://img.shields.io/lgtm/grade/java/g/sjvs/ondersteunende-software-verkiezingen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sjvs/ondersteunende-software-verkiezingen/context:java)
+[![Total Alerts](https://img.shields.io/lgtm/alerts/g/sjvs/ondersteunende-software-verkiezingen.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/sjvs/ondersteunende-software-verkiezingen/alerts)
 
 ## What is this?
 This repository contains the source code of "OSV broncode programma 4 en 5 versie 2.21.4" as downloaded from kiesraad.nl on 13 March 2018.
